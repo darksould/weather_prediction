@@ -9,7 +9,6 @@ from prediction import Prediction
 
 
 class GeoLookup(object):
-    "docstring for WeatherClient"
 
     url_base = "http://api.wunderground.com/api/"
     url_service = {"geolookup": "/geolookup/q/"}

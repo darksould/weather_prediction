@@ -15,7 +15,7 @@ class WeatherForecast(object):
     def __init__(self, api_key):
         super(WeatherForecast, self).__init__()
         self.api_key = api_key
-        self.predic = Prediction()
+        self.predict = Prediction()
         self.result = []
 
     def forecast(self, location, country):
@@ -32,8 +32,8 @@ class WeatherForecast(object):
         for values in data_json["simpleforecast"]["forecastday"]:
             listatemp = []
             listatemp.append(values["date"]["weekday"])
-            listatemp.append("In the day: " + self.predic.get_predict_forecast(values["high"]["celsius"]))
-            listatemp.append("In the night: " + self.predic.get_predict_forecast(values["low"]["celsius"]))
+            listatemp.append("In the day: " + self.predict.get_predict_forecast(values["high"]["celsius"]))
+            listatemp.append("In the night: " + self.predict.get_predict_forecast(values["low"]["celsius"]))
             self.result.append(listatemp)
 
         return self.result

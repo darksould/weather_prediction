@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 import argparse
 from hourly import WeatherHourly
 from almanac import WeatherAlmanac
@@ -10,32 +11,36 @@ from geolookup import GeoLookup
 
 
 def main(opts):
+    try:
+        country = format(" ", opts.country)
+        city = format("_", opts.city)
+        print country, city
+        cc = Countries()
+        country_code = cc.get_country(country);
+        if opts.forecast:
+            wf = WeatherForecast(opts.api_key)
+            forecast_result = wf.forecast(city, country_code)
+            show_result(forecast_result, city, country)
 
-    country = opts.country.title()
-    cc = Countries()
-    country_code = cc.get_country(country);
-    if opts.forecast:
+        if opts.hourly:
+            wh = WeatherHourly(opts.api_key)
+            hourly_result = wh.hourly(city, country_code)
+            show_result(hourly_result, city, country)
 
-        wf = WeatherForecast(opts.api_key)
-        forecast_result = wf.forecast(opts.city, country_code)
-        show_result(forecast_result, opts.city, country)
+        if opts.almanac:
+            wl = WeatherAlmanac(opts.api_key)
+            almanac_result = wl.almanac(city, country)
+            print "******************** COUNTRY:" + country + " --- CITY: " + city + " ****************************"
+            print "****************************** RECORDS ****************************"
+            print almanac_result
 
-    if opts.hourly:
-        wh = WeatherHourly(opts.api_key)
-        hourly_result = wh.hourly(opts.city, country_code)
-        show_result(hourly_result, opts.city, country)
-
-    if opts.almanac:
-        wl = WeatherAlmanac(opts.api_key)
-        almanac_result = wl.almanac(opts.city, country)
-        print "******************** COUNTRY:" + country + " --- CITY: " + opts.city + " ****************************"
-        print "****************************** RECORDS ****************************"
-        print almanac_result
-
-    if opts.geolookup:
-        print "******************** COUNTRY:" + country + " --- CITY: " + opts.city + " ****************************"
-        geo = GeoLookup(opts.api_key)
-        print geo.geo(opts.city, country_code)
+        if opts.geolookup:
+            print "******************** COUNTRY:" + country + " --- CITY: " + city + " ****************************"
+            geo = GeoLookup(opts.api_key)
+            print geo.geo(opts.city, country_code)
+    except KeyError:
+        print "Some one of the values (Key, City, Country) are incorrect check and try again"
+        sys.exit(-1)
 
 
 def show_result(result, city, country):
@@ -48,6 +53,9 @@ def show_result(result, city, country):
         print "**********************************************************************************************" \
               "*********************************************"
 
+def format(separator, value):
+    words = separator.join(value)
+    return words.title()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -58,10 +66,10 @@ if __name__ == '__main__':
                         help="Key")
 
     parser.add_argument('-co', '--country', type=str, required=True,
-                        help="Choose your country")
+                        help="Choose your country", nargs='+')
 
     parser.add_argument('-ci', '--city', type=str, required=True,
-                        help="Choose de city")
+                        help="Choose de city", nargs='+')
 
     parser.add_argument('-ff', '--forecast', action='store_true',
                         required=True, help="Weather Forecast for the next 3 days")
