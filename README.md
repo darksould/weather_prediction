@@ -1,17 +1,17 @@
-#Weather
+# Weather
 
 
-##This project used the next API:
+## This project used the next API:
 
 * For more information, go to [Weather Underground](http://api.wunderground.com/weather/api "Weather Underground").
 
-##Library you need to used this project:
+## Library you need to used this project:
 
 * requests
 * json
 
 
-##Differents options can you select in this project `main.py`:
+## Differents options can you select in this project `main.py`:
 
 
   * `Required`,`-k` : ( this requires a value for example 76f51fbe23 ) Code for access to API Underground
