@@ -10,12 +10,13 @@ class Prediction(object):
         'Chance of Rain': 'Be carefull the day is not the all good, so dont forget your chaquet, scarf, and umbrella',
         'Rain': 'It is raining outside, grab the umbrella and a good coat, also do not forget '
                 'to have some good boots for the rain',
-        'Clear': 'It'"s" + 'a good time to go out and have fun, put on your sports clothes and do some exercises',
+        'Clear': 'It´'"s" + ' a good time to go out and have fun, put on your sports clothes and do some exercises',
         'Mostly Cloudy': 'The sun still does not give up so wear your sneakers and a good scarf and have fun.',
         'Overcast': 'Is not bad outside you can go out, but for advice you can have a chaquet',
         'Snow': 'Be careful where you step is a day with snow so take cover and get the car if you leave today',
         'Chance of a Thunderstom': 'Do not forget to bring umbrellas and boots, as it is very likely to rain a lot.',
-        'Snow Showers': 'Beware the day is ugly if you want to go outside dress in an armor. It is very cold.'}
+        'Snow Showers': 'Beware the day is ugly if you want to go outside dress in an armor. It is very cold.',
+        'Ice Pellets':'Watch out for the little ice cubes, wear your boots, with your coat and do not forget the umbrella or a hat'}
 
     dict_ff = {
         '1': 'Be careful outside it is very cold with very low temperatures. Wear thick clothing that can shelter you..',
@@ -34,7 +35,7 @@ class Prediction(object):
         return Prediction.dict_hh[condition]
 
     def get_predict_forecast(self, condition):
-        return self.make_prediction(condition)
+        return self.make_prediction(int(condition))
 
     def make_prediction(self, temp):
         if temp<=5:

@@ -28,8 +28,8 @@ class WeatherAlmanac(object):
 
         return \
             "Year: " + data_json["almanac"]["temp_high"]["recordyear"] + ":" + "\n" + \
-            data_json["almanac"]["temp_high"]["normal"]["C"] + " celsius" + " - " + \
+            "Between "+ data_json["almanac"]["temp_high"]["normal"]["C"] + " / " + \
             data_json["almanac"]["temp_high"]["record"]["C"] + " celsius" + "\n" + \
             "Year: " + data_json["almanac"]["temp_low"]["recordyear"] + ":" + "\n" + \
-            data_json["almanac"]["temp_low"]["normal"]["C"] + " celsius" + " - " + \
+            "Between " + data_json["almanac"]["temp_low"]["normal"]["C"] + " / " + \
             data_json["almanac"]["temp_low"]["record"]["C"] + " celsius" + "\n"

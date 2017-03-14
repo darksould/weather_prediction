@@ -14,9 +14,9 @@ def main(opts):
     try:
         country = format(" ", opts.country)
         city = format("_", opts.city)
-        print country, city
         cc = Countries()
-        country_code = cc.get_country(country);
+        country_code = cc.get_country(country)
+
         if opts.forecast:
             wf = WeatherForecast(opts.api_key)
             forecast_result = wf.forecast(city, country_code)
@@ -29,7 +29,7 @@ def main(opts):
 
         if opts.almanac:
             wl = WeatherAlmanac(opts.api_key)
-            almanac_result = wl.almanac(city, country)
+            almanac_result = wl.almanac(city, country_code)
             print "******************** COUNTRY:" + country + " --- CITY: " + city + " ****************************"
             print "****************************** RECORDS ****************************"
             print almanac_result
@@ -37,7 +37,8 @@ def main(opts):
         if opts.geolookup:
             print "******************** COUNTRY:" + country + " --- CITY: " + city + " ****************************"
             geo = GeoLookup(opts.api_key)
-            print geo.geo(opts.city, country_code)
+            print geo.geo(city, country_code)
+
     except KeyError:
         print "Some one of the values (Key, City, Country) are incorrect check and try again"
         sys.exit(-1)
@@ -47,11 +48,11 @@ def show_result(result, city, country):
     print "********************************************* COUNTRY:" + country + " --- CITY: " + city + " " \
             "*******************************************"
     for data in result:
-
         for values in data:
             print values
         print "**********************************************************************************************" \
               "*********************************************"
+
 
 def format(separator, value):
     words = separator.join(value)
